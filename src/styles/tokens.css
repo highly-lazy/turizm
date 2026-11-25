@@ -1,0 +1,147 @@
+:root {
+  --ink: #0d2b33;
+  --ink-2: #14404a;
+  --primary: #0b7a75;
+  --primary-dark: #075b57;
+  --primary-soft: #e0f2f0;
+  --coral: #ff6b4a;
+  --coral-ink: #b93a1c;
+  --sun: #ffb627;
+  --sun-soft: #fff3d6;
+  --bg: #f2f6f5;
+  --surface: #fff;
+  --surface-2: #f7faf9;
+  --line: #d6e1e0;
+  --line-strong: #b4c6c5;
+  --text: #10262c;
+  --muted: #4e646a;
+  --ok: #0a7a43;
+  --ok-soft: #def5e7;
+  --no: #c02a2a;
+  --no-soft: #fde6e4;
+  --c: var(--primary);
+
+  --radius-s: 0.5rem;
+  --radius: 0.85rem;
+  --radius-l: 1.25rem;
+  --shadow: 0 1px 2px rgb(13 43 51 / 6%), 0 8px 24px rgb(13 43 51 / 6%);
+  --font: 'Onest Variable', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'JetBrains Mono Variable', Consolas, monospace;
+  --topbar: 4.25rem;
+
+  color-scheme: light;
+}
+
+/* Proyektorda o‘qilishi uchun butun interfeys ekran kengligi bilan o‘sadi */
+html {
+  font-size: clamp(15px, 0.42vw + 10px, 24px);
+  scroll-padding-top: calc(var(--topbar) + 1rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1rem/1.5 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 1.9rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+a {
+  color: var(--primary-dark);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 2px;
+}
+
+svg.lucide {
+  width: 1.2em;
+  height: 1.2em;
+  flex: none;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.accent {
+  color: var(--coral-ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,39 @@
+@media print {
+  html {
+    font-size: 11px;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .no-print,
+  .toasts,
+  .details {
+    display: none !important;
+  }
+
+  .shell {
+    display: block;
+  }
+
+  .page,
+  .focus {
+    padding: 0;
+  }
+
+  .panel {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  tr,
+  .bank-item {
+    break-inside: avoid;
+  }
+
+  * {
+    print-color-adjust: exact;
+  }
+}

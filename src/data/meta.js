@@ -1,0 +1,40 @@
+export const meta = {
+  course: 'Turizmda elektron tijorat',
+  group: 'TM-324',
+  topic: '3-mavzu',
+  code: 'A3',
+  title: 'Turizm bozorini va elektron marketing vositalarini tahlil qilish',
+  description:
+    'Turizm bozorini segmentatsiyalash, maqsadli turistlar guruhlarini aniqlash va elektron marketing vositalaridan foydalanishni baholash. Guruhlar jamoa bo‘lib ishlaydi, har savolga bitta talaba shaxsan javob beradi.',
+  goal: 'Turizm bozorini segmentlarga ajratish, maqsadli turistlar guruhini asoslab tanlash va elektron marketing vositalarining samarasini raqamlar bilan baholash ko‘nikmasini hosil qilish.',
+  plan: [
+    ['3.1', 'Turizm bozori tahlili'],
+    ['3.2', 'Segmentatsiya mezonlari'],
+    ['3.3', 'Maqsadli turistlar guruhi'],
+    ['3.4', 'Persona va pozitsiyalash'],
+    ['3.5', 'Elektron marketing vositalari'],
+    ['3.6', 'Samaradorlik ko‘rsatkichlari'],
+    ['A3', 'Amaliy mashg‘ulot'],
+  ],
+  controlQuestions: [
+    'Turizm bozori qanday mezonlar bo‘yicha segmentlanadi?',
+    'Maqsadli segmentni tanlashda nimalar hisobga olinadi?',
+    'Elektron marketing vositasining samarasi qaysi ko‘rsatkichlar bilan baholanadi?',
+  ],
+  concepts: [
+    ['Segmentatsiya', 'bozorni o‘xshash ehtiyojli guruhlarga bo‘lish'],
+    ['Targeting', 'maqsadli segmentni tanlash'],
+    ['Pozitsiyalash', 'taklifning mijoz ongidagi o‘rni'],
+    ['Persona', 'maqsadli mijozning umumlashgan portreti'],
+    ['TAM → SAM → SOM', 'butun bozor → mos bozor → erishiladigan ulush'],
+  ],
+  formulas: [
+    'CTR = kliklar : ko‘rsatishlar × 100%',
+    'CPC = xarajat : kliklar',
+    'CPA = xarajat : bronlar',
+    'CR = bronlar : kliklar × 100%',
+    'ROAS = tushum : reklama xarajati',
+    'ROI = (foyda − xarajat) : xarajat × 100%',
+    'CAC = marketing xarajati : yangi mijozlar',
+  ],
+};

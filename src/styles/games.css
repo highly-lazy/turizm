@@ -1,0 +1,472 @@
+.game-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.game-head__title {
+  flex: 1;
+  min-width: 14rem;
+}
+
+.intro {
+  justify-items: start;
+  max-width: 48rem;
+  font-size: 1.1rem;
+}
+
+/* ---- Hisob taxtasi ---- */
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.score {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.score__name {
+  overflow: hidden;
+  color: var(--c);
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.score__detail {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.score__value {
+  grid-row: span 2;
+  font: 700 1.7rem/1 var(--mono);
+}
+
+.score__value small {
+  color: var(--muted);
+  font-size: 0.45em;
+}
+
+.score.is-current {
+  border-color: var(--c);
+  background: var(--c);
+}
+
+.score.is-current * {
+  color: #fff;
+}
+
+.track {
+  display: flex;
+  gap: 4px;
+}
+
+.track i {
+  flex: 1;
+  height: 0.45rem;
+  border-radius: 99px;
+  background: var(--line);
+}
+
+.track .is-done { background: var(--primary); }
+.track .is-current { background: var(--sun); }
+
+/* ---- Savol ekrani ---- */
+.stage {
+  display: grid;
+  grid-template-columns: minmax(15rem, 1fr) minmax(0, 3fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.stage--wide {
+  grid-template-columns: minmax(20rem, 1fr) minmax(0, 1.8fr);
+}
+
+.question-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.question-head .timer {
+  margin-left: auto;
+}
+
+.question {
+  font-size: clamp(1.35rem, 1.9vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.question--center {
+  max-width: 46ch;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.respondent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--c) 10%, #fff);
+}
+
+.respondent > svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--c);
+}
+
+.respondent > div {
+  flex: 1;
+  display: grid;
+}
+
+.respondent small {
+  color: var(--muted);
+}
+
+.respondent b {
+  color: var(--c);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.locked {
+  display: grid;
+  gap: 0.6rem;
+  place-items: center;
+  place-content: center;
+  min-height: 11rem;
+  padding: 1rem;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+}
+
+.locked svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 4.6rem;
+  padding: 0.8rem 1.1rem;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: clamp(1.05rem, 1.35vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.option kbd {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--bg);
+  font: 700 1.1rem var(--mono);
+}
+
+.option__key {
+  margin-left: auto;
+  color: #a06a00;
+}
+
+.option.is-correct { border-color: var(--ok); background: var(--ok-soft); }
+.option.is-correct kbd { background: var(--ok); color: #fff; }
+.option.is-wrong { border-color: var(--no); background: var(--no-soft); }
+.option.is-wrong kbd { background: var(--no); color: #fff; }
+.option.is-dim { opacity: 0.6; }
+
+.outcome {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--radius);
+  background: var(--no-soft);
+  font-size: 1.1rem;
+  animation: toast-in 0.25s ease-out;
+}
+
+.outcome h3 {
+  color: var(--no);
+  font-size: 1.5rem;
+}
+
+.outcome[data-ok='true'] { background: var(--ok-soft); }
+.outcome[data-ok='true'] h3 { color: var(--ok); }
+
+.outcome--center {
+  justify-items: center;
+  text-align: center;
+}
+
+.points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.75rem;
+}
+
+.verdict {
+  padding: 0.2rem 1.6rem;
+  border: 4px solid;
+  border-radius: var(--radius);
+  font-size: clamp(1.8rem, 3vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.verdict--yes { color: var(--ok); }
+.verdict--no { color: var(--no); }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.controls .btn:not(.btn--xl) {
+  min-height: 3.6rem;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* ---- Javoblar taxtasi ---- */
+.wall {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.wall__row {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.wall__row > span:first-child {
+  color: var(--c);
+  font-weight: 600;
+}
+
+.wall__cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.wall__cells i {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.4rem;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.wall__cells .is-correct { background: var(--ok); box-shadow: none; }
+.wall__cells .is-wrong { background: repeating-linear-gradient(45deg, #b8c6c8 0 4px, #dbe4e5 4px 8px); box-shadow: none; }
+
+.rich + .wall {
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ---- Ha / Yo‘q ---- */
+.ladder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ladder li {
+  flex: 1;
+  min-width: 7rem;
+  padding: 0.4rem;
+  border-radius: var(--radius-s);
+  background: #e1eae9;
+  color: var(--muted);
+  text-align: center;
+}
+
+.ladder .is-current { background: var(--sun); color: #2b1e00; }
+.ladder .is-done { background: var(--ok-soft); color: #075c32; }
+
+.yes-no {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.yes-no button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  min-height: 7rem;
+  border: 0;
+  border-radius: var(--radius-l);
+  color: #fff;
+  font-size: clamp(1.6rem, 2.8vw, 3.2rem);
+  font-weight: 800;
+  transition: filter 0.15s;
+}
+
+.yes-no button:hover:not(:disabled) { filter: brightness(1.1); }
+.yes-no button:disabled { background: #b5c4c6; color: #fff; }
+.yes-no__yes { background: var(--ok); }
+.yes-no__no { background: var(--no); }
+
+.sandbox-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #8a5300;
+  font-weight: 700;
+}
+
+/* ---- Atama qidirish ---- */
+.words {
+  display: grid;
+  grid-template-columns: auto minmax(22rem, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.grid {
+  --cell: clamp(1.9rem, min(4vw, 7.2vh), 4.6rem);
+
+  display: grid;
+  grid-template-columns: repeat(10, var(--cell));
+  grid-auto-rows: var(--cell);
+  width: max-content;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ink);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.grid[data-inactive] {
+  cursor: default;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 7%);
+  color: #e6f1f1;
+  font: 700 calc(var(--cell) * 0.5) var(--mono);
+}
+
+.cell.is-found { background: var(--c); color: #fff; }
+.cell.is-missing { box-shadow: inset 0 0 0 3px var(--sun); }
+.cell.is-selected { background: var(--sun); color: var(--ink); }
+.cell.is-shaking { animation: shake 0.35s; background: var(--no); }
+
+@keyframes shake {
+  25%, 75% { translate: -4px 0; }
+  50% { translate: 4px 0; }
+}
+
+.words__status {
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-s);
+  background: var(--bg);
+  font-weight: 500;
+}
+
+.words__status.is-missed {
+  background: var(--no-soft);
+  color: #911c1c;
+}
+
+.clues {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
+  gap: 0 1.5rem;
+  padding-left: 1.6rem;
+}
+
+.clues li {
+  padding: 0.45rem 0.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.clues li > * {
+  display: block;
+}
+
+.clues small {
+  color: var(--muted);
+}
+
+.clues .is-found { color: var(--muted); }
+.clues .is-found b { color: var(--ok); }
+.clues .is-missed b { color: var(--no); }
+
+@media (max-width: 70rem) {
+  .stage,
+  .stage--wide,
+  .words {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stage:not(.stage--wide) .stage__side {
+    order: 2;
+  }
+}
+
+@media (max-width: 40rem) {
+  .options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid {
+    --cell: calc((100vw - 5.5rem) / 10);
+  }
+}

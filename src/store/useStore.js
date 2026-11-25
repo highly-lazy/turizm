@@ -26,7 +26,9 @@ export const useStore = create(
     })),
     {
       name: STORAGE_KEY,
-      version: 1,
+      version: 2,
+      // v1 da ro‘yxat bo‘sh boshlangan: o‘shanda saqlangan bo‘sh ro‘yxat boshlang‘ichi bilan to‘ldiriladi
+      migrate: (saved) => (saved.roster?.length ? saved : { ...saved, roster: createInitialState().roster }),
       partialize: (state) => Object.fromEntries(Object.entries(state).filter(isData)),
     },
   ),

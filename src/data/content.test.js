@@ -137,7 +137,7 @@ describe('doska', () => {
 });
 
 describe('ro‘yxat', () => {
-  it('takrorsiz', () => {
-    expect(new Set(DEFAULT_ROSTER).size).toBe(DEFAULT_ROSTER.length);
+  it('25 nafar, takrorsiz', () => {
+    expect(new Set(DEFAULT_ROSTER).size).toBe(25);
   });
 });

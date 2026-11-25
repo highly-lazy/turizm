@@ -24,10 +24,9 @@ npm run build    # dist/
 
 ## Talabalar ro‘yxati
 
-Ro‘yxat shaxsiy ma’lumot bo‘lgani uchun repozitoriyda yo‘q. Ikki yo‘l bor:
-
-- «Davomat» sahifasidagi maydonga ro‘yxatni joylash (har qatorga bitta ism), yoki
-- `src/data/roster.local.js` faylini yaratish: `export const DEFAULT_ROSTER = ['Familiya Ism', ...];`
+Boshlang‘ich ro‘yxat (familiya va ism) `src/data/roster.js` faylida. To‘liq ism-shariflar repozitoriyga kirmaydi:
+`src/data/roster.local.js` fayli yaratilsa (`export const DEFAULT_ROSTER = [...]`), o‘rniga shu ro‘yxat ishlatiladi.
+Talabalarni «Davomat» sahifasida ham qo‘shish va o‘chirish mumkin.
 
 ## Tuzilishi
 

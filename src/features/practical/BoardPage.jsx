@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Button, Panel, RichText } from '@/components/ui';
 import { boardTasks, findTask, meta, TASK_IDS, tasks } from '@/data';
 import { useLaunchGame } from '@/hooks/useLaunchGame';
+import { useScrollToActive } from '@/hooks/useScrollToActive';
 import { checkedRows, sumRows } from '@/lib/board';
 import { cx, groupColor, shortName } from '@/lib/utils';
 import { useStore } from '@/store/useStore';
@@ -14,10 +15,12 @@ function ActorBar() {
   const actor = state.boardActor;
   const group = state.groups.find((g) => g.id === actor?.groupId);
   const rows = checkedRows(state);
+  const groupsRef = useScrollToActive(actor?.groupId);
+  const studentsRef = useScrollToActive(actor?.student);
 
   return (
     <div className="actor no-print">
-      <div className="actor__row" role="group" aria-label="Doskadagi guruh">
+      <div ref={groupsRef} className="actor__row" role="group" aria-label="Doskadagi guruh">
         <b>Doskada</b>
         {state.groups.map((g, i) => (
           <button key={g.id} type="button" className="pill" style={{ '--c': groupColor(i) }} aria-pressed={g.id === actor?.groupId} onClick={() => state.setBoardActor(g.id)}>
@@ -26,7 +29,7 @@ function ActorBar() {
         ))}
       </div>
       {group?.members.length > 0 && (
-        <div className="actor__row" role="group" aria-label="Doskadagi talaba">
+        <div ref={studentsRef} className="actor__row" role="group" aria-label="Doskadagi talaba">
           <b>Talaba</b>
           {group.members.map((name) => (
             <button
@@ -82,6 +85,7 @@ export function BoardPage() {
   const state = useStore();
   const navigate = useNavigate();
   const { launch, resume } = useLaunchGame();
+  const tabsRef = useScrollToActive(taskId);
   const task = findTask(taskId);
   if (!task) return <Navigate to="/doska" replace />;
 
@@ -98,11 +102,11 @@ export function BoardPage() {
           <h1>Doska: {meta.code}-amaliy</h1>
           <p className="muted">Ball doskadagi talabaga va guruhiga yoziladi</p>
         </div>
-        <Button icon={Play} onClick={() => (practiceActive ? resume('practice') : launch('practice'))}>Jamoaviy tekshiruv</Button>
+        <Button icon={Play} className="btn--collapse" onClick={() => (practiceActive ? resume('practice') : launch('practice'))}>Jamoaviy tekshiruv</Button>
         <Button icon={Printer} aria-label="Chop etish" onClick={() => window.print()} />
       </header>
 
-      <nav className="task-tabs no-print" aria-label="Topshiriqlar">
+      <nav ref={tabsRef} className="task-tabs no-print" aria-label="Topshiriqlar">
         {tasks.map(({ id, title }) => (
           <Link key={id} to={`/doska/${id}`} title={title} className={cx('mono', id === taskId && 'is-active')} aria-current={id === taskId ? 'page' : undefined}>
             {id}

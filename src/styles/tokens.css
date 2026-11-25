@@ -34,8 +34,10 @@
 
 /* Proyektorda o‘qilishi uchun butun interfeys ekran kengligi bilan o‘sadi */
 html {
-  font-size: clamp(15px, 0.42vw + 10px, 24px);
+  font-size: clamp(16px, 0.42vw + 10px, 24px);
   scroll-padding-top: calc(var(--topbar) + 1rem);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 *,
@@ -46,7 +48,8 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-wrap: break-word;
   background: var(--bg);
   color: var(--text);
   font: 400 1rem/1.5 var(--font);

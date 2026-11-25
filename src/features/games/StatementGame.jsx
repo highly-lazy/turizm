@@ -4,6 +4,7 @@ import { Level, Panel, TimerRing } from '@/components/ui';
 import { statements } from '@/data';
 import { useGameTimer } from '@/hooks/useGameTimer';
 import { useHotkeys } from '@/hooks/useHotkeys';
+import { useScrollToActive } from '@/hooks/useScrollToActive';
 import { colorOfGroup, groupById } from '@/lib/groups';
 import { cx } from '@/lib/utils';
 import { currentGroupId } from '@/store/slices/quiz';
@@ -13,8 +14,9 @@ import { GameControls, PointsSplit, Respondent, Scoreboard } from './parts';
 
 function Ladder({ game, stage }) {
   const stageDone = game.phase === 'revealed' && game.turn % game.groupIds.length === game.groupIds.length - 1;
+  const ref = useScrollToActive(stage);
   return (
-    <ol className="ladder">
+    <ol ref={ref} className="ladder">
       {Array.from({ length: game.rounds }, (_, i) => (
         <li key={i} className={cx((i < stage || (i === stage && stageDone)) && 'is-done', i === stage && 'is-current')}>
           {i + 1}-bosqich <b>{stagePoints(i)}</b>
@@ -104,7 +106,7 @@ export function StatementGame() {
           </div>
         )}
         <GameControls gameKey="tf" phase={phase} paused={game.paused} onUndo={state.undoStatement} onAction={act} actionLabel={actionLabel} />
-        <p className="hint">Space — keyingi qadam · H yoki 1 — HA · Y yoki 2 — YO‘Q · P — pauza · Backspace — bekor qilish</p>
+        <p className="hint key-hint">Space — keyingi qadam · H yoki 1 — HA · Y yoki 2 — YO‘Q · P — pauza · Backspace — bekor qilish</p>
       </Panel>
     </>
   );

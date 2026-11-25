@@ -77,12 +77,12 @@ export function NumberField({ label, unit, value, min, max, step = 1, onChange }
   );
 }
 
-export function Switch({ checked, onChange, children }) {
+export function Switch({ checked, onChange, label, children }) {
   return (
     <label className="switch">
-      <input type="checkbox" role="switch" checked={checked} onChange={onChange} />
+      <input type="checkbox" role="switch" aria-label={label} checked={checked} onChange={onChange} />
       <span className="switch__track" aria-hidden="true" />
-      <span>{children}</span>
+      <span className="switch__text">{children}</span>
     </label>
   );
 }
@@ -153,9 +153,12 @@ export function Dialog({ onClose, className, children }) {
   );
 }
 
+// «2 000 000» qator oxirida bo‘linmasin
+const keepNumbers = (html) => html.replace(/(\d) (?=\d{3})/g, '$1\u00a0').replace(/(\d) (so‘m|mln|mlrd)/g, '$1\u00a0$2');
+
 /** Loyiha ma’lumotlaridagi ishonchli HTML (topshiriq sharti va kaliti). */
 export function RichText({ html, className }) {
-  return <div className={cx('rich', className)} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className={cx('rich', className)} dangerouslySetInnerHTML={{ __html: keepNumbers(html) }} />;
 }
 
 export function Logo() {

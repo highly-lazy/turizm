@@ -38,7 +38,7 @@ function GroupTable() {
   const state = useStore();
   return (
     <div className="table-wrap">
-      <table className="table">
+      <table className="table table--cards">
         <thead>
           <tr>
             <th>Guruh</th>
@@ -56,10 +56,10 @@ function GroupTable() {
               <tr key={group.id}>
                 <th scope="row"><GroupDot color={groupColor(i)} /> {group.name} <small className="muted">{group.members.length} talaba</small></th>
                 {SECTION_KEYS.map((key) => (
-                  <td key={key} className="num">{grade(state, key, group.id) ?? '—'}</td>
+                  <td key={key} data-label={GAMES[key].short} className="num">{grade(state, key, group.id) ?? '—'}</td>
                 ))}
-                <td className="num num--total">{result ? formatNumber(result.score) : '—'}</td>
-                <td><MarkBadge score={result?.score ?? null} /></td>
+                <td data-label="Jami" className="num num--total">{result ? formatNumber(result.score) : '—'}</td>
+                <td data-label="Baho" className="mark-cell"><MarkBadge score={result?.score ?? null} /></td>
               </tr>
             );
           })}
@@ -73,7 +73,7 @@ function StudentTable() {
   const state = useStore();
   return (
     <div className="table-wrap">
-      <table className="table">
+      <table className="table table--cards">
         <thead>
           <tr>
             <th className="num">№</th>
@@ -95,17 +95,17 @@ function StudentTable() {
             const group = groupOfStudent(state, name);
             return (
               <tr key={name} className={cx(!present && 'is-absent')}>
-                <td className="num">{i + 1}</td>
+                <td className="num row-no">{i + 1}</td>
                 <th scope="row">{name}{!present && <small className="muted"> kelmadi</small>}</th>
-                <td className="nowrap">{group ? <><GroupDot color={groupColor(groupIndex(state, group.id))} /> {group.name}</> : '—'}</td>
-                <td className="num">{ratio(r.test) || '—'}</td>
-                <td className="num">{ratio(r.tf) || '—'}</td>
-                <td className="num">{ratio(r.practice) || '—'}</td>
-                <td className="num">{r.board ? `${r.board.earned}/${r.board.max}` : '—'}</td>
-                <td className="num">{r.words ? `${r.words.found}/10` : '—'}</td>
-                <td className="num">{studentAnswers(state, name)}/{QUESTIONS_PER_STUDENT}</td>
-                <td className="num num--total">{r.percent ?? '—'}</td>
-                <td><MarkBadge score={r.percent} /></td>
+                <td data-label="Guruh" className="nowrap">{group ? <><GroupDot color={groupColor(groupIndex(state, group.id))} /> {group.name}</> : '—'}</td>
+                <td data-label="Test" className="num">{ratio(r.test) || '—'}</td>
+                <td data-label="Ha/Yo‘q" className="num">{ratio(r.tf) || '—'}</td>
+                <td data-label="Amaliy A3" className="num">{ratio(r.practice) || '—'}</td>
+                <td data-label="Doska" className="num">{r.board ? `${r.board.earned}/${r.board.max}` : '—'}</td>
+                <td data-label="Atama" className="num">{r.words ? `${r.words.found}/10` : '—'}</td>
+                <td data-label="Savollar" className="num">{studentAnswers(state, name)}/{QUESTIONS_PER_STUDENT}</td>
+                <td data-label="Ball" className="num num--total">{r.percent ?? '—'}</td>
+                <td data-label="Baho" className="mark-cell"><MarkBadge score={r.percent} /></td>
               </tr>
             );
           })}
@@ -140,7 +140,7 @@ export function ResultsPage() {
           <>
             <Button variant="primary" icon={Trophy} onClick={() => openSheet('final')}>E’lon qilish</Button>
             <Button icon={Printer} onClick={() => window.print()}>Chop etish</Button>
-            <Button icon={ClipboardCopy} onClick={() => copyForExcel(state)}>Excel uchun nusxa</Button>
+            <Button icon={ClipboardCopy} onClick={() => copyForExcel(state)}>Excel nusxa</Button>
             <Button variant="danger-soft" icon={Trash2} onClick={requestReset}>Tozalash</Button>
           </>
         }

@@ -81,6 +81,11 @@ export function WordGame() {
       <Scoreboard gameKey="words" currentId={groupId} />
       <div className="words" style={{ '--c': colorOfGroup(state, groupId) }}>
         <Panel className="words__board">
+          <div className="question-head">
+            <span className="chip chip--lg">{group.name}</span>
+            <b>{found}/{WORDS_PER_SET} · {found * 10} ball</b>
+            <TimerRing left={game.left} total={game.seconds} running={phase === 'running'} paused={game.paused} />
+          </div>
           <WordGrid
             key={groupId}
             board={board}
@@ -89,19 +94,13 @@ export function WordGame() {
             showMissing={phase === 'revealed' || state.sandbox}
             onSubmit={submit}
           />
-          <p className="hint">So‘zni boshidan oxirigacha suring yoki avval boshini, keyin oxirini bosing. Faqat →, ↓ yoki ↘.</p>
+          <GameControls gameKey="words" phase={phase} paused={game.paused} onAction={act} actionLabel={actionLabel} actionDisabled={phase === 'running'} />
         </Panel>
-        <Panel>
-          <div className="question-head">
-            <span className="chip chip--lg">{group.name}</span>
-            <span className="muted">{game.turn + 1}/{game.groupIds.length}-guruh</span>
-            <b>{found}/{WORDS_PER_SET} · {found * 10} ball</b>
-            <TimerRing left={game.left} total={game.seconds} running={phase === 'running'} paused={game.paused} />
-          </div>
+        <Panel className="words__side">
           <p className={cx('words__status', missed && phase === 'running' && 'is-missed')} role="status">
             {statusText(game, group, found, missed)}
           </p>
-          <GameControls gameKey="words" phase={phase} paused={game.paused} onAction={act} actionLabel={actionLabel} actionDisabled={phase === 'running'} />
+          <p className="hint">So‘zni boshidan oxirigacha suring yoki avval boshini, keyin oxirini bosing. Faqat →, ↓ yoki ↘.</p>
           <Clues board={board} phase={phase} sandbox={state.sandbox} />
         </Panel>
       </div>

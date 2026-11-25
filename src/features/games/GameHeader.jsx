@@ -18,7 +18,7 @@ export function GameHeader({ gameKey, active }) {
         <p className="muted">{subtitle}</p>
       </div>
       {active && (
-        <Button variant="danger-soft" icon={Square} title="Bajarilgan savollar bo‘yicha baho hisoblanadi" onClick={() => finishGame(gameKey)}>
+        <Button variant="danger-soft" className="btn--collapse" icon={Square} title="Bajarilgan savollar bo‘yicha baho hisoblanadi" onClick={() => finishGame(gameKey)}>
           To‘xtatib hisoblash
         </Button>
       )}

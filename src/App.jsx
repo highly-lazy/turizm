@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AppLayout, FocusLayout, ScrollToTop } from '@/components/layout/AppLayout';
 import { Overlays, SessionWatcher } from '@/components/layout/Overlays';
@@ -21,24 +21,22 @@ export function App() {
     <BrowserRouter>
       <ScrollToTop />
       <SessionWatcher />
-      <Suspense fallback={null}>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<SettingsPage />} />
-            <Route path="davomat" element={<AttendancePage />} />
-            <Route path="guruhlar" element={<GroupsPage />} />
-            <Route path="oyinlar" element={<GamesPage />} />
-            <Route path="amaliy" element={<PracticalPage />} />
-            <Route path="natijalar" element={<ResultsPage />} />
-          </Route>
-          <Route element={<FocusLayout />}>
-            <Route path="oyin/:gameKey" element={<GamePage />} />
-            <Route path="doska/:taskId?" element={<BoardPage />} />
-            <Route path="savollar" element={<BankPage />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<SettingsPage />} />
+          <Route path="davomat" element={<AttendancePage />} />
+          <Route path="guruhlar" element={<GroupsPage />} />
+          <Route path="oyinlar" element={<GamesPage />} />
+          <Route path="amaliy" element={<PracticalPage />} />
+          <Route path="natijalar" element={<ResultsPage />} />
+        </Route>
+        <Route element={<FocusLayout />}>
+          <Route path="oyin/:gameKey" element={<GamePage />} />
+          <Route path="doska/:taskId?" element={<BoardPage />} />
+          <Route path="savollar" element={<BankPage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
       <Overlays />
     </BrowserRouter>
   );

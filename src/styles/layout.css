@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-height: var(--topbar);
+  min-height: 4.25rem;
   padding: 0.5rem clamp(1rem, 2vw, 2rem);
 }
 
@@ -137,8 +137,11 @@
 
 .rail {
   position: sticky;
+  z-index: 15;
   top: var(--topbar);
   align-self: start;
+  max-height: calc(100dvh - var(--topbar));
+  overflow-y: auto;
   padding: 1.75rem 0.5rem 1.75rem clamp(0.75rem, 1.5vw, 1.5rem);
 }
 
@@ -186,6 +189,10 @@
   border-radius: 50%;
   background: var(--surface);
   color: var(--muted);
+}
+
+.rail__short {
+  display: none;
 }
 
 .rail__text {
@@ -252,56 +259,3 @@
   gap: 1.25rem;
 }
 
-@media (max-width: 64rem) {
-  .topbar__title,
-  .topbar__count {
-    display: none;
-  }
-
-  .topbar__row {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .shell {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .rail {
-    z-index: 10;
-    padding: 0.5rem;
-    overflow-x: auto;
-    border-bottom: 1px solid var(--line);
-    background: var(--bg);
-  }
-
-  .rail ol {
-    display: flex;
-    width: max-content;
-  }
-
-  .rail ol::before,
-  .rail__text small {
-    display: none;
-  }
-
-  .rail__item {
-    padding: 0.35rem 0.75rem 0.35rem 0.35rem;
-  }
-
-  .rail__icon {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-
-  .page__nav .muted {
-    display: none;
-  }
-}
-
-@media (max-width: 30rem) {
-  .brand small {
-    display: none;
-  }
-}

@@ -47,7 +47,7 @@ function BoardCell({ taskId, row, cell, column }) {
   const { setDraft, judgeCell, overrideCell } = useStore.getState();
 
   if (cell.type === 'blank') return <td />;
-  if (cell.type === 'fixed') return <td className="fixed">{cell.value}</td>;
+  if (cell.type === 'fixed') return <td data-label={column} className="fixed">{cell.value}</td>;
 
   const status = record?.cells[cell.id];
   const label = `${row.label}: ${column}`;
@@ -58,7 +58,7 @@ function BoardCell({ taskId, row, cell, column }) {
   };
 
   return (
-    <td className={cx(status === 1 && 'is-ok', status === 0 && 'is-bad')}>
+    <td data-label={column} className={cx(status === 1 && 'is-ok', status === 0 && 'is-bad')}>
       {cell.type === 'select' && <SelectInput cell={cell} value={value} label={label} onChange={change} />}
       {cell.type === 'number' && (
         <span className="unit-input">

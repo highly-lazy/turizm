@@ -1,7 +1,7 @@
 /* ---- Sozlamalar: bosh blok ---- */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(16rem, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(15rem, 1fr);
   gap: 2rem;
   align-items: center;
   padding: clamp(1.5rem, 2.6vw, 2.75rem);
@@ -56,7 +56,7 @@
   font-family: var(--font);
 }
 
-@media (max-width: 75rem) {
+@media (max-width: 56rem) {
   .hero {
     grid-template-columns: minmax(0, 1fr);
   }

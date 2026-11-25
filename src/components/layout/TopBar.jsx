@@ -1,5 +1,5 @@
 import { FlaskConical, Music, Pause, Play, VolumeX } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Logo } from '@/components/ui';
 import { meta } from '@/data';
@@ -43,7 +43,21 @@ function SessionTimer() {
   );
 }
 
+/** Panelning haqiqiy balandligini --topbar ga yozadi: yopishqoq bloklar doim uning ostida turadi. */
+function useTopbarHeight(ref) {
+  useLayoutEffect(() => {
+    const element = ref.current;
+    const observer = new ResizeObserver(() => {
+      document.documentElement.style.setProperty('--topbar', `${element.offsetHeight}px`);
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [ref]);
+}
+
 export function TopBar() {
+  const ref = useRef(null);
+  useTopbarHeight(ref);
   const sandbox = useStore((s) => s.sandbox);
   const setSandbox = useStore((s) => s.setSandbox);
   const answered = useStore(answeredCount);
@@ -51,7 +65,7 @@ export function TopBar() {
   const toggleMusic = useUi((s) => s.toggleMusic);
 
   return (
-    <header className="topbar no-print">
+    <header ref={ref} className="topbar no-print">
       {sandbox && (
         <div className="sandbox">
           <FlaskConical aria-hidden="true" />

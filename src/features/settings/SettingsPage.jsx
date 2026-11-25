@@ -103,7 +103,7 @@ export function SettingsPage() {
               <div key={key} className="section-list__item" style={{ '--c': color }}>
                 <span className="tile-icon"><Icon aria-hidden="true" /></span>
                 <b>{title}</b>
-                <Switch checked={settings.enabled[key]} onChange={() => toggleSection(key)}>
+                <Switch checked={settings.enabled[key]} label={`${title}: dars rejasida`} onChange={() => toggleSection(key)}>
                   {settings.enabled[key] ? 'Rejada' : 'Rejada emas'}
                 </Switch>
               </div>

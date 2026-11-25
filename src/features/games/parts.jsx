@@ -1,6 +1,7 @@
 import { Mic, Pause, Play, Undo2 } from 'lucide-react';
 import { Button } from '@/components/ui';
 import { QUESTIONS_PER_STUDENT } from '@/config/games';
+import { useScrollToActive } from '@/hooks/useScrollToActive';
 import { colorOfGroup, groupById } from '@/lib/groups';
 import { grade, studentAnswers } from '@/lib/scoring';
 import { cx, shortName } from '@/lib/utils';
@@ -14,8 +15,9 @@ const detail = (key, result) => {
 /** Guruhlar hisob taxtasi. */
 export function Scoreboard({ gameKey, currentId }) {
   const state = useStore();
+  const ref = useScrollToActive(currentId);
   return (
-    <ul className="scoreboard">
+    <ul ref={ref} className="scoreboard">
       {state.games[gameKey].groupIds.map((id) => {
         const score = grade(state, gameKey, id);
         return (

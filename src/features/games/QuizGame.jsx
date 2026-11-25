@@ -112,15 +112,14 @@ export function QuizGame({ gameKey }) {
       <Scoreboard gameKey={gameKey} currentId={groupId} />
       <ProgressTrack total={game.total} done={game.turn + (revealed ? 1 : 0)} current={game.turn} />
       <div className={cx('stage', task && 'stage--wide')} style={{ '--c': colorOfGroup(state, groupId) }}>
-        <Panel className="stage__side">
-          {task && (
-            <>
-              <h3><span className="mono">{task.id}</span> {task.title}</h3>
+        {task && (
+          <Panel className="stage__context">
+            <details open>
+              <summary><span className="mono accent">{task.id}</span> {task.title}</summary>
               <RichText html={task.context} />
-            </>
-          )}
-          <AnswerWall game={game} />
-        </Panel>
+            </details>
+          </Panel>
+        )}
         <Panel className="stage__main">
           <div className="question-head">
             <span className="chip chip--lg">{group.name}</span>
@@ -147,7 +146,10 @@ export function QuizGame({ gameKey }) {
             onAction={act}
             actionLabel={actionLabel}
           />
-          <p className="hint">Space — keyingi qadam · A–D — variant · P — pauza · Backspace — bekor qilish</p>
+          <p className="hint key-hint">Space — keyingi qadam · A–D — variant · P — pauza · Backspace — bekor qilish</p>
+        </Panel>
+        <Panel className="stage__wall">
+          <AnswerWall game={game} />
         </Panel>
       </div>
     </>

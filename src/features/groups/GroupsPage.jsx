@@ -2,7 +2,7 @@ import { Dices, Plus, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button, PageHeader, Panel } from '@/components/ui';
 import { total } from '@/lib/scoring';
-import { groupColor } from '@/lib/utils';
+import { formatNumber, groupColor } from '@/lib/utils';
 import { useStore } from '@/store/useStore';
 import { confirm, toast } from '@/store/useUi';
 
@@ -60,7 +60,7 @@ function GroupCard({ group, index }) {
       )}
       <footer>
         <span><b>{group.members.length}</b> talaba</span>
-        <span><b>{total(state, group.id)?.score ?? 0}</b> ball</span>
+        <span><b>{formatNumber(total(state, group.id)?.score ?? 0)}</b> ball</span>
       </footer>
     </article>
   );

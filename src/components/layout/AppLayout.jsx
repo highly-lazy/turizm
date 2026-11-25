@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, Trophy } from 'lucide-react';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui';
 import { STEPS } from '@/config/steps';
@@ -28,9 +28,9 @@ export function AppLayout() {
       <div className="shell">
         <nav className="rail no-print" aria-label="Dars qadamlari">
           <ol>
-            {STEPS.map(({ path, title, hint, icon: Icon }, i) => (
+            {STEPS.map(({ path, title, short, hint, icon: Icon }, i) => (
               <li key={path}>
-                <NavLink to={path} end className={({ isActive }) => cx('rail__item', isActive && 'is-active', i < current && 'is-past')}>
+                <NavLink to={path} end title={title} aria-label={title} className={({ isActive }) => cx('rail__item', isActive && 'is-active', i < current && 'is-past')}>
                   <span className="rail__icon">
                     <Icon aria-hidden="true" />
                   </span>
@@ -38,6 +38,7 @@ export function AppLayout() {
                     <b>{title}</b>
                     <small>{hint}</small>
                   </span>
+                  <span className="rail__short">{short}</span>
                 </NavLink>
               </li>
             ))}
@@ -51,7 +52,7 @@ export function AppLayout() {
             ) : (
               <span />
             )}
-            <span className="muted">Klaviaturada ← → bilan ham o‘tiladi</span>
+            <span className="muted key-hint">Klaviaturada ← → bilan ham o‘tiladi</span>
             {next ? (
               <Button variant="primary" iconEnd={ArrowRight} onClick={() => navigate(next.path)}>{next.title}</Button>
             ) : (
@@ -70,7 +71,9 @@ export function FocusLayout() {
     <>
       <TopBar />
       <main className="focus">
-        <Outlet />
+        <Suspense fallback={<p className="muted">Yuklanmoqda…</p>}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );

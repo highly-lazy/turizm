@@ -1,0 +1,1053 @@
+/*
+ * Moslashuvchanlik. Bosqichlar:
+ *   > 64rem   to‘liq sidebar
+ *   ≤ 64rem   planshet: ikonkali sidebar, bir ustunli o‘yin, doska kartalari
+ *   ≤ 48rem   telefon: pastki menyu, yopishqoq asosiy tugma, jadval kartalari
+ *   ≤ 40rem   tor telefon
+ *   past ekran (max-height: 30rem) — yotqizilgan telefon
+ */
+
+/* ---- Sensorli ekran: barmoq uchun qulay o‘lcham ---- */
+@media (pointer: coarse) {
+  .btn,
+  .stepper button {
+    min-height: 2.75rem;
+  }
+
+  .stepper button,
+  .btn--icon {
+    min-width: 2.75rem;
+  }
+
+  .btn--sm {
+    min-height: 2.5rem;
+  }
+
+  .btn--lg {
+    min-height: 3.1rem;
+  }
+
+  .btn--xl {
+    min-height: 3.5rem;
+  }
+
+  .segmented button,
+  .pill,
+  .choices button,
+  .judge button,
+  .presence button,
+  .switch {
+    min-height: 2.5rem;
+  }
+
+  .auto-mark__btn {
+    justify-content: center;
+    min-width: 2.6rem;
+    min-height: 2.3rem;
+  }
+
+  .details summary,
+  .stage__context summary {
+    padding-block: 0.5rem;
+  }
+
+  input[type='checkbox'] {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .group-card li select {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .group-card header input {
+    min-height: 2.5rem;
+  }
+
+  .tasks a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+  }
+
+  .task-tabs a {
+    padding-block: 0.65rem;
+  }
+
+  .respondent__swap select {
+    min-height: 2.75rem;
+  }
+}
+
+/* Klaviatura yorliqlari sensorli ekranda kerak emas */
+@media (hover: none) {
+  .key-hint {
+    display: none !important;
+  }
+
+  .stage__main .controls {
+    margin-bottom: -1.1rem;
+    border-radius: 0 0 1rem 1rem;
+  }
+}
+
+/* ======================== Planshet ======================== */
+@media (max-width: 64rem) {
+  .topbar__title,
+  .topbar__count {
+    display: none;
+  }
+
+  .brand {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .shell {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .rail {
+    padding: 1.25rem 0.25rem 1.25rem max(0.5rem, env(safe-area-inset-left));
+  }
+
+  .rail ol::before {
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  .rail__item {
+    padding: 0.4rem;
+  }
+
+  .rail__text {
+    display: none;
+  }
+
+  .stage,
+  .stage--wide {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stage__wall .wall__row {
+    grid-template-columns: 7rem minmax(0, 1fr);
+    align-items: center;
+  }
+
+  /* Doska: talaba va guruh qatori bir chiziqda suriladi */
+  .actor__row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -1rem;
+    padding: 3px 1rem;
+    scrollbar-width: none;
+  }
+
+  .actor__row > * {
+    flex: none;
+  }
+
+  /* Doska jadvali — kartalar */
+  .board-table,
+  .board-table tbody {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .board-table thead {
+    display: none;
+  }
+
+  .board-table tr {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: 0.9rem;
+    align-items: start;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  .board-table tr.is-sample {
+    background: var(--sun-soft);
+  }
+
+  .board-table tbody tr > * {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .board-table tbody th {
+    grid-column: 1 / -1;
+    font-size: 1.05rem;
+  }
+
+  .board-table td:empty,
+  .board-table .is-sample .row-result {
+    display: none;
+  }
+
+  .board-table tbody td.is-ok,
+  .board-table tbody td.is-bad {
+    margin: -0.4rem;
+    padding: 0.4rem;
+    border-radius: var(--radius-s);
+  }
+
+  .board-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .board-table tbody .row-result {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .row-actions {
+    flex: 1;
+    justify-content: flex-end;
+    margin: 0;
+  }
+}
+
+/* To‘rtta guruh 3 + 1 bo‘lib qolmasin */
+@media (min-width: 40rem) and (max-width: 89rem) {
+  .group-grid:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- Past balandlikdagi noutbuk va planshet ---- */
+@media (max-height: 51rem) and (min-width: 48.01rem) {
+  .focus {
+    gap: 0.9rem;
+    padding-top: 0.9rem;
+  }
+
+  .game-head__title h1 {
+    font-size: 1.5rem;
+  }
+
+  .game-head__title .muted {
+    display: none;
+  }
+
+  .stage__main,
+  .words__board {
+    gap: 0.8rem;
+  }
+
+  .stage__main {
+    padding-top: 1.1rem;
+  }
+
+  .question-head .timer {
+    width: 3.7rem;
+    height: 3.7rem;
+  }
+
+  .question-head .timer b {
+    font-size: 1.2rem;
+  }
+
+  .yes-no button {
+    min-height: 5.5rem;
+  }
+
+  .grid {
+    --cell: clamp(1.7rem, min(4vw, calc((100dvh - 26rem) / 10)), 4.6rem);
+  }
+}
+
+/* Keng jadval gorizontal surishsiz sig‘sin */
+@media (max-width: 80rem) {
+  .table--cards th,
+  .table--cards td {
+    padding-inline: 0.4rem;
+    font-size: 0.92rem;
+  }
+}
+
+/* ---- Atama qidirish: tik ekran ---- */
+@media (max-width: 64rem) and (orientation: portrait) {
+  .words {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .grid {
+    --cell: min(calc((100vw - 4.7rem) / 10), 4.2rem, 6.2vh);
+  }
+}
+
+/* ---- Natija jadvali — kartalar ---- */
+@media (max-width: 60rem) {
+  .table--cards,
+  .table--cards tbody {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .table--cards thead {
+    display: none;
+  }
+
+  .table--cards tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(7rem, auto);
+    gap: 0.6rem 0.75rem;
+    padding: 0.85rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  .table--cards tbody tr > * {
+    padding: 0;
+    border: 0;
+  }
+
+  .table--cards tbody th {
+    grid-row: 1;
+    grid-column: 1 / 3;
+  }
+
+  .table--cards tbody td,
+  .table--cards tbody td.num {
+    display: block;
+    text-align: left;
+  }
+
+  .table--cards tbody td.row-no {
+    display: none;
+  }
+
+  .table--cards tbody .mark-cell {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .table--cards tbody .mark-cell::before {
+    content: none;
+  }
+
+  .table--cards td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--muted);
+    font: 500 0.78rem var(--font);
+  }
+
+  .table--cards .num--total,
+  .table--cards .nowrap {
+    order: -1;
+  }
+}
+
+@media (min-width: 40rem) and (max-width: 60rem) {
+  .table--cards tr {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(7rem, auto);
+  }
+
+  .table--cards tbody th {
+    grid-column: 1 / 5;
+  }
+
+  .table--cards tbody .mark-cell {
+    grid-column: 5;
+  }
+}
+
+/* ======================== Telefon ======================== */
+@media (max-width: 48rem) {
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  /* -- Header -- */
+  .topbar__row {
+    gap: 0.5rem;
+    min-height: 3.5rem;
+    padding-block: 0.35rem;
+  }
+
+  .sandbox {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 0.35rem 1rem;
+    font-size: 0.82rem;
+    line-height: 1.3;
+  }
+
+  .sandbox .btn {
+    flex: none;
+  }
+
+  /* -- Pastki menyu -- */
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rail {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 0.3rem 0.25rem max(0.3rem, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: 0 -4px 20px rgb(13 43 51 / 8%);
+  }
+
+  .rail ol {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .rail ol::before {
+    display: none;
+  }
+
+  .rail__item {
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.2rem 0;
+  }
+
+  .rail__item.is-active {
+    background: none;
+    box-shadow: none;
+  }
+
+  .rail__icon {
+    width: 2.9rem;
+    height: 1.85rem;
+    border: 0;
+    border-radius: 99px;
+    background: none;
+  }
+
+  .rail__short {
+    display: block;
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .rail__item.is-active .rail__short {
+    color: var(--primary-dark);
+    font-weight: 700;
+  }
+
+  /* Ekran klaviaturasi ochilganda menyu maydonni to‘smasin */
+  body:has(:is(textarea, input:not([type='checkbox'])):focus) .rail {
+    display: none;
+  }
+
+  /* -- Sahifa -- */
+  .page,
+  .focus {
+    gap: 1rem;
+    padding: 1rem max(1rem, env(safe-area-inset-right)) 1.5rem max(1rem, env(safe-area-inset-left));
+  }
+
+  .page {
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
+  }
+
+  .page__nav {
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+  }
+
+  .page__nav .btn {
+    flex: 1;
+  }
+
+  .page__nav .key-hint,
+  .page__nav > span:empty {
+    display: none;
+  }
+
+  .panel {
+    gap: 1rem;
+    padding: 1.1rem;
+    border-radius: 1rem;
+  }
+
+  .page-head .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.2rem, 1fr));
+    width: 100%;
+  }
+
+  .page-head .btn {
+    padding-inline: 0.5rem;
+  }
+
+  .timer {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .timer b {
+    font-size: 1.15rem;
+  }
+
+  .toasts {
+    bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+
+  .toast {
+    padding: 0.65rem 1rem;
+    text-align: center;
+  }
+
+  /* -- Oyna pastdan chiqadigan varaqqa aylanadi -- */
+  .dialog,
+  .dialog--sm,
+  .dialog--lg {
+    width: 100%;
+    max-width: none;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+  }
+
+  .dialog__body {
+    padding: 1.25rem 1rem max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .dialog--lg h2 {
+    font-size: 1.5rem;
+  }
+
+  .dialog .row--end {
+    position: sticky;
+    bottom: 0;
+    padding-block: 0.5rem;
+    background: var(--surface);
+  }
+
+  .dialog .row--end .btn {
+    flex: 1;
+  }
+
+  .rank {
+    gap: 0.7rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  /* -- Sozlamalar -- */
+  .hero {
+    gap: 1.25rem;
+    padding: 1.35rem 1.1rem;
+    border-radius: 1rem;
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero__figure {
+    max-width: 19rem;
+  }
+
+  .plan-legend li:last-child {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .section-list__item {
+    flex-wrap: nowrap;
+  }
+
+  .section-list__item b {
+    min-width: 0;
+  }
+
+  .section-list .switch {
+    min-width: 0;
+  }
+
+  .section-list .switch__text {
+    display: none;
+  }
+
+  /* -- Davomat, guruhlar, o‘yinlar -- */
+  .split-panel .row {
+    width: 100%;
+  }
+
+  .split-panel .field,
+  .split-panel .btn {
+    flex: 1 1 11rem;
+  }
+
+  .tally {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .notice .btn,
+  .game-card > .row,
+  .add-students .btn {
+    width: 100%;
+  }
+
+  .game-card > .row .btn,
+  .notice .btn {
+    flex: 1 1 auto;
+    white-space: nowrap;
+  }
+
+  .bank {
+    gap: 1.25rem;
+    padding-left: 1.6rem;
+  }
+
+  /* -- O‘yin ekrani -- */
+  .game-head {
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+  }
+
+  .game-head > .tile-icon,
+  .game-head__title .muted {
+    display: none;
+  }
+
+  .game-head__title {
+    min-width: 0;
+  }
+
+  .game-head__title h1 {
+    font-size: 1.2rem;
+  }
+
+  .game-head > .btn {
+    flex: none;
+  }
+
+  .scoreboard,
+  .ladder,
+  .task-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    overflow-x: auto;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    scrollbar-width: none;
+  }
+
+  .score {
+    flex: 1 0 11.5rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .score__value {
+    font-size: 1.35rem;
+  }
+
+  .ladder li {
+    flex: 1 0 8rem;
+    min-width: 0;
+  }
+
+  .question {
+    font-size: 1.3rem;
+  }
+
+  .question--center {
+    margin-block: 0.25rem;
+  }
+
+  .question-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.2rem 0.75rem;
+  }
+
+  .question-head > :not(.timer) {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .question-head .timer {
+    grid-row: 1 / span 3;
+    grid-column: 2;
+    align-self: center;
+  }
+
+  .respondent {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .respondent b {
+    font-size: 1.15rem;
+  }
+
+  .respondent > div {
+    min-width: 0;
+  }
+
+  .respondent__swap,
+  .respondent__swap select {
+    width: 100%;
+  }
+
+  .locked {
+    min-height: 8rem;
+  }
+
+  .option {
+    gap: 0.7rem;
+    min-height: 3.5rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .outcome {
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+  }
+
+  .outcome h3 {
+    font-size: 1.25rem;
+  }
+
+  .yes-no button {
+    gap: 0.4rem;
+    min-height: 5.5rem;
+  }
+
+  .controls {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .controls .btn,
+  .controls .btn:not(.btn--xl) {
+    min-height: 3.25rem;
+    padding-inline: 0.75rem;
+  }
+
+  .controls .btn--xl {
+    font-size: 1.05rem;
+  }
+
+  .stage__main .controls {
+    margin-inline: -1.1rem;
+    padding: 0.7rem 1.1rem max(0.7rem, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+  }
+
+  .words__board {
+    gap: 0.8rem;
+  }
+
+  /* -- Doska -- */
+  .actor {
+    gap: 0.25rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .actor__row > b {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .task-context {
+    padding: 0.85rem;
+    font-size: 1rem;
+  }
+
+  .rich th,
+  .rich td {
+    padding: 0.35rem 0.45rem;
+    font-size: 0.92rem;
+  }
+
+  .board-table .row-actions .btn:first-child {
+    flex: 1;
+  }
+}
+
+/* Baland telefonda atama maydoni ko‘rinib turadi, ta’riflar ostidan aylanadi */
+@media (max-width: 34rem) and (orientation: portrait) and (min-height: 48rem) {
+  .words__board {
+    position: sticky;
+    z-index: 5;
+    top: var(--topbar);
+  }
+}
+
+/* ======================== Tor telefon ======================== */
+@media (max-width: 40rem) {
+  .options {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .words__board {
+    padding: 0.8rem;
+  }
+
+  .grid {
+    --cell: min(calc((100vw - 3.7rem) / 10), 4.2rem);
+  }
+
+  .rank {
+    grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+  }
+
+  .rank__bar {
+    display: none;
+  }
+
+  .rank__place {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.05rem;
+  }
+
+  .rank__score {
+    font-size: 1.35rem;
+  }
+
+  .panel__head .btn {
+    flex: 1;
+  }
+
+  /* Faqat ikonka qoladigan tugma (nomi ekran o‘qigich uchun saqlanadi) */
+  .btn--collapse {
+    position: relative;
+    padding-inline: 0.75rem;
+  }
+
+  .btn--collapse > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .student {
+    display: grid;
+    grid-template: 'no name del' auto 'chip chip chip' auto 'pres pres pres' auto / 1.8rem minmax(0, 1fr) auto;
+    gap: 0.35rem 0.6rem;
+    padding: 0.7rem 0;
+  }
+
+  .student__no { grid-area: no; }
+  .student__name { grid-area: name; }
+  .student > .btn { grid-area: del; }
+
+  .student .chip {
+    grid-area: chip;
+    justify-self: start;
+    max-width: 100%;
+    margin-left: 2.4rem;
+  }
+
+  .student .presence {
+    grid-area: pres;
+    margin-left: 2.4rem;
+  }
+
+  .presence button {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tasks li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.1rem 0.8rem;
+  }
+
+  .tasks a {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .word-sets dl div {
+    grid-template-columns: 6.6rem minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 30rem) {
+  .brand span {
+    display: none;
+  }
+
+  .topbar__row {
+    padding-inline: 0.75rem;
+  }
+
+  .session__time {
+    min-width: 4rem;
+  }
+
+  .hero__stats dd {
+    font-size: 1.25rem;
+  }
+
+  .rich th,
+  .rich td {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .controls .btn:not(.btn--xl) > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .controls .btn:not(.btn--xl) {
+    position: relative;
+    min-width: 3.25rem;
+  }
+}
+
+@media (max-width: 24rem) {
+  .table--cards tr {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem 0.4rem;
+  }
+
+  .table--cards tbody th {
+    grid-column: 1 / -1;
+  }
+
+  .table--cards tbody .mark-cell {
+    grid-row: auto;
+    grid-column: 1 / -1;
+    order: -2;
+    justify-self: start;
+  }
+
+  .table--cards td::before {
+    font-size: 0.74rem;
+  }
+
+  .table--cards .mark--none {
+    display: none;
+  }
+}
+
+/* ======================== Past ekran: yotqizilgan telefon ======================== */
+@media (max-height: 30rem) {
+  .topbar__row {
+    min-height: 3rem;
+    padding-block: 0.2rem;
+  }
+
+  .rail {
+    padding-block: 0.5rem;
+  }
+
+  .rail__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .rail__item {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .focus {
+    gap: 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .game-head__title .muted,
+  .game-head > .tile-icon {
+    display: none;
+  }
+
+  .game-head__title h1 {
+    font-size: 1.15rem;
+  }
+
+  .score {
+    padding: 0.3rem 0.7rem;
+  }
+
+  .score__value {
+    font-size: 1.2rem;
+  }
+
+  .question {
+    font-size: 1.2rem;
+  }
+
+  .timer {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .timer b {
+    font-size: 1.05rem;
+  }
+
+  .locked {
+    min-height: 5rem;
+  }
+
+  .option {
+    min-height: 3rem;
+    padding-block: 0.4rem;
+  }
+
+  .yes-no button {
+    min-height: 4rem;
+  }
+
+  .words {
+    grid-template-columns: auto minmax(14rem, 1fr);
+  }
+
+  .grid {
+    --cell: 1.75rem;
+  }
+
+  .actor {
+    position: static;
+  }
+}
